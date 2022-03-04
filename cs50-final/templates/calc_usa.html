@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Calculate
+{% endblock %}
+
+{% block main %}
+    <h2>Calculate your GPA using A/A-/B+ system</h2><br>
+    <div class="alert alert-info">
+        <strong>Hey!</strong> You can enter your previous coursework to calculate cgpa.
+    </div><br>
+    <p><strong>Previous coursework:</strong></p>
+    <div class="prev">
+        <input autofocus class="form-control" name="prevcgpa" id="prevcgpa" placeholder="Previous gpa" type="number" step=".01" min="0" max="4"><br><br>
+        <input class="form-control" name="prevcred" id="prevcred" placeholder="Total credit" type="number" min="0">
+        <br><br>
+    </div>
+    <table class="table table-striped" text-align="left">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Courses</th>
+                <th>Credits</th>
+                <th>Grades</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for num in range(1, course_num | int + 1) %}
+            <tr>
+                <td>{{ num }}</td>
+                <td><input type="text" autofocus class="form-control names" name="Course{{ num }}" placeholder="Course {{ num }}"/></td>
+				<td><input autocomplete="off" class="form-control credits" min="1" max="6" name="Credit{{ num }}" placeholder="0" type="number"></td>
+                <td><select class="form-control grades" name="Grade{{ num }}">
+					<option disabled="" selected="" value="">#{{ num }}</option>
+					<option value="A">A</option>
+					<option value="A-">A-</option>
+					<option value="B+">B+</option>
+					<option value="B">B</option>
+					<option value="B-">B-</option>
+					<option value="C+">C+</option>
+					<option value="C">C</option>
+					<option value="C-">C-</option>
+					<option value="D+">D+</option>
+					<option value="D">D</option>
+					<option value="F">F</option>
+				</select></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button class="btn btn-primary" type="button" name="calcbutton" onclick="calcusa()">Calculate!</button>
+    <br><br>
+    <div id="result">
+    </div>
+    {% if session.user_id %}
+        <form action="/insert" id="insert">
+
+        </form>
+    {% endif %}
+    <style>
+        .prev input{
+            width: 170px;
+        }
+    </style>
+{% endblock %}

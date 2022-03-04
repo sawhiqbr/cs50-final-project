@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Main
+{% endblock %}
+
+{% block main %}
+    <p>Choose your grading system and enter the number of courses to continue.</p>
+    <form action="/calculate" method="post" id="aaaaah">
+        <div class="form-group">
+            <select class="form-control" name="system">
+                <option disabled="" selected="" value="">Grading System</option>
+                <option value="calc_try">AA/BA/BB</option>
+                <option value="calc_usa">A/A-/B+</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input autocomplete="off" class="form-control" min="1" max="20" name="course_num" placeholder="Number of courses" type="number">
+        </div>
+        <button class="btn btn-primary" type="submit">Continue</button>
+    </form>
+    <style>
+        #aaaaah .form-control {
+            width: 200px;
+        }
+    </style>
+{% endblock %}
